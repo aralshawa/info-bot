@@ -25,7 +25,7 @@ $ npm install
 ```sh
 $ npm run create
 ```
-5. To configure for a Twilio account and SMS bot. This will result with a list of webhooks to the Lambda function that can be called when a message comes into the desired Twilio phone number.
+5. To configure and store Twilio account access keys and tokens into the API Gateway stage variables. This will result with a list of webhooks to the Lambda function that can be called when a message comes into the desired Twilio phone number.
 ```sh
 $ npm run update -- --configure-twilio-sms-bot
 ```
