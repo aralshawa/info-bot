@@ -18,6 +18,7 @@
     "claudia-bot-builder": "^2.15.0",
     "greeting": "^1.0.6",
     "node-fetch": "^1.7.1",
-    "weather-js": "^2.0.0"
+    "weather-js": "^2.0.0",
+    "wikijs": "^3.1.0"
   }
 }

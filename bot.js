@@ -5,12 +5,14 @@
 
 var botBuilder = require('claudia-bot-builder');
 
-var greeting = require('greeting');
 var fetch = require('node-fetch');
-var weather = require("weather-js")
+var greeting = require('greeting');
+var weather = require("weather-js");
+var wiki = require('wikijs').default;
 
 const WEATHER_REGEX = /(weather|forecast)/gi
-const QUOTATION_REGEX = /(quote|quotation)/i
+const WIKIPEDIA_REGEX = /(wiki|wikipedia)/gi
+const QUOTATION_REGEX = /(quote|quotation)/gi
 
 /*
  * Bot Builder
@@ -19,10 +21,19 @@ var bot = botBuilder(function(message) {
   let msg = message.text;
   if (msg.match(WEATHER_REGEX)) {
     // Weather
-    let targetLocation = msg.replace(WEATHER_REGEX,'');
+    let targetLocation = msg.replace(WEATHER_REGEX, '').trim();
     return fetchWeather(targetLocation, 'C').then((response) => {
       return response;
     });
+  } else if (msg.match(WIKIPEDIA_REGEX)) {
+    // Wikipedia
+    let targetLookup = msg.replace(WIKIPEDIA_REGEX, '').trim();
+    return wiki().page(targetLookup)
+      .then(page => page.summary())
+      .then((response) => {
+        // Return the first paragraph of the summary
+        return response.substr(0, response.indexOf('\n')); ;
+      });
   } else if (msg.match(QUOTATION_REGEX)) {
     // Quotation
     return fetchQuotation();
