@@ -17,6 +17,7 @@
   "dependencies": {
     "claudia-bot-builder": "^2.15.0",
     "greeting": "^1.0.6",
-    "node-fetch": "^1.7.1"
+    "node-fetch": "^1.7.1",
+    "weather-js": "^2.0.0"
   }
 }
