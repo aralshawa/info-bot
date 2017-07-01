@@ -3,12 +3,14 @@
  * Goal: A client that performs quick lookups based on a textual query.
  */
 
-var botBuilder = require('claudia-bot-builder');
+const botBuilder = require('claudia-bot-builder');
 
-var fetch = require('node-fetch');
-var greeting = require('greeting');
-var weather = require("weather-js");
-var wiki = require('wikijs').default;
+const fetch = require('node-fetch'),
+      greeting = require('greeting'),
+      weather = require("weather-js"),
+      wiki = require('wikijs').default;
+
+const QUOTATION_GET_URL = "http://api.forismatic.com/api/1.0/?method=getQuote&format=text&lang=en"
 
 const WEATHER_REGEX = /(weather|forecast)/gi
 const WIKIPEDIA_REGEX = /(wiki|wikipedia)/gi
@@ -17,7 +19,7 @@ const QUOTATION_REGEX = /(quote|quotation)/gi
 /*
  * Bot Builder
  */
-var bot = botBuilder(function(message) {
+const bot = botBuilder((message) => {
   let msg = message.text;
   if (msg.match(WEATHER_REGEX)) {
     // Weather
@@ -48,7 +50,7 @@ var bot = botBuilder(function(message) {
  */
 function fetchWeather(query, unit) {
   return new Promise((resolve, reject) => {
-    weather.find({search: query, degreeType: unit}, function(err, result) {
+    weather.find({search: query, degreeType: unit}, (err, result) => {
       var response = null;
 
       if (err == null && result && result.length > 0) {
@@ -85,7 +87,7 @@ function fetchWeather(query, unit) {
  * Quotation Utility
  */
 function fetchQuotation() {
-  return fetch('http://api.forismatic.com/api/1.0/?method=getQuote&format=text&lang=en').then(function(res) {
+  return fetch(QUOTATION_GET_URL).then((res) => {
     return res.text();
   });
 }
