@@ -1,7 +1,16 @@
 Info Bot
 ============
 
-A simple client that performs quick lookups based on a textual query.
+In remote areas where cellular 3G connectivity is more difficult to come by, it is often difficult to perform quick online lookups; one example being looking up the short-term weather to inform hiking decisions.
+
+This is a simple client intended to be deployed as a Twilio SMS webhook that performs quick lookups based on a textual query. Backed by an AWS Lambda function, this allows the user to offload the desired network request to a serverless platform.
+
+Sample Utterances
+------------
+* "Weather in Yosemite"
+* "Forecast 36.508, -118.575"
+* "Wiki Half Dome"
+* "Give me a quotation!"
 
 Key Dependencies
 ------------
@@ -36,3 +45,7 @@ References
 * [Claudia Bot Builder API](https://github.com/claudiajs/claudia-bot-builder/blob/master/docs/API.md)
 * [Create an SMS Bot on AWS Lambda with Claudia](https://www.twilio.com/blog/2016/12/create-an-sms-bot-on-aws-lambda-with-claudia-js.html)
 * [AWS JS SDK Configuration](http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/configuring-the-jssdk.html)
+
+Future Work
+------------
+* Integrate WolframAlpha textual querying
