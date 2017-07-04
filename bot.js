@@ -34,7 +34,10 @@ const bot = botBuilder((message) => {
       .then(page => page.summary())
       .then((response) => {
         // Return the first paragraph of the summary
-        return response.substr(0, response.indexOf('\n')); ;
+        const firstNewLineIdx = response.indexOf('\n');
+        return response.substr(0, firstNewLineIdx > 0 ? firstNewLineIdx : response.length);
+      }).catch((err) => {
+        return `Sorry, no results were found for '${targetLookup}'.`;
       });
   } else if (msg.match(QUOTATION_REGEX)) {
     // Quotation
@@ -75,7 +78,7 @@ function fetchWeather(query, unit) {
         }
 
       } else {
-        response = "Sorry, the weather in '" + query + "' couldn't be found.";
+        response = `Sorry, the weather in '${query}' couldn't be found.`;
       }
 
       resolve(response);
