@@ -63,20 +63,19 @@ function fetchWeather(query, unit) {
 
         // Current weather
         response = targetLoc.location.name + "\n";
-        response += "Currently, " + current.skytext + " " + current.temperature + "°C\n";
+        response += `Currently, ${current.skytext} ${current.temperature}°C\n`;
 
         if (forecast.length >= 3) {
             // If at least a 3 day forecast is avaialble
             // Note: [0, 1, 2, ...] => [yesturday, today, tomorrow, ...]
             let today = forecast[1];
-            response += "High " + today.high + "°C | Low " + today.low + "°C";
+            response += `High ${today.high}°C | Low ${today.low}°C\n`;
 
             let tomorrow = forecast[2];
-            response += "\n\nTomorrow's Forecast \n";
+            response += "\nTomorrow's Forecast\n";
             response += tomorrow.skytextday + "\n";
-            response += "High " + tomorrow.high + "°C | Low " + tomorrow.low + "°C";
+            response += `High ${tomorrow.high}°C | Low ${tomorrow.low}°C`;
         }
-
       } else {
         response = `Sorry, the weather in '${query}' couldn't be found.`;
       }
